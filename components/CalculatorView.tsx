@@ -1,3 +1,4 @@
+import { useState } from "react"
 import {
     StyleProp, TextInput, TextInputProps, View, ViewStyle
 } from "react-native"
@@ -12,6 +13,8 @@ export type CalculatorViewPropsType = {
 }
 
 const CalculatorView = (props: CalculatorViewPropsType) => {
+    const [inputExpression, setInputExpression] = useState('')
+
     const viewStyle: StyleProp<ViewStyle> = {
         height: props.height,
         width: props.width
@@ -42,13 +45,36 @@ const CalculatorView = (props: CalculatorViewPropsType) => {
         fontFamily: 'Fira Code',
         fontSize: 14,
 
-        height: '90%'
+        height: '90%',
+
+        inputExpression: inputExpression,
+        setInputExpression: setInputExpression
     }
 
     const firstRow = (
         <ButtonRow { ...buttonRowCommonProps }>
-            <Button { ...buttonCommonProps } label="C" width={ '20%' } />
-            <Button { ...buttonCommonProps } label="( )" width={ '20%' } />
+            <Button { ...buttonCommonProps } label="C" width={ '20%' }
+                onTouchEnd={ () => setInputExpression('') }
+            />
+            
+            <Button { ...buttonCommonProps } label="( )" width={ '20%' }
+                onTouchEnd={
+                    () => {
+                        // decide wether to insert open or close parentheses
+                        
+                        const openParenLastChars = [
+                            '', '+', '-', 'X', '/', '^', '(']
+                        const lastInputChar = inputExpression.slice(-1)
+
+                        if (openParenLastChars.includes(lastInputChar)) {
+                            setInputExpression(inputExpression + '(')
+                        } else {
+                            setInputExpression(inputExpression + ')')
+                        }
+                    }
+                }
+            />
+
             <Button { ...buttonCommonProps } label="!" width={ '20%' } />
             <Button { ...buttonCommonProps } label="^" width={ '20%' } />
         </ButtonRow>
@@ -83,7 +109,9 @@ const CalculatorView = (props: CalculatorViewPropsType) => {
     
     const fifthRow = (
         <ButtonRow { ...buttonRowCommonProps }>
-            <Button { ...buttonCommonProps } label="=" width={ '20%' } />
+            <Button { ...buttonCommonProps } label="=" width={ '20%' }
+                onTouchEnd={ () => void(0) }
+            />
             <Button { ...buttonCommonProps } label="0" width={ '20%' } />
             <Button { ...buttonCommonProps } label="." width={ '20%' } />
             <Button { ...buttonCommonProps } label="/" width={ '20%' } />
@@ -92,14 +120,20 @@ const CalculatorView = (props: CalculatorViewPropsType) => {
 
     const sixthRow = (
         <ButtonRow { ...buttonRowCommonProps }>
-            <Button { ...buttonCommonProps } label="SAVE" width={ '45%' } />
-            <Button { ...buttonCommonProps } label="BACKSPACE" width={ '45%' } />
+            <Button { ...buttonCommonProps } label="SAVE" width={ '45%' }
+                onTouchEnd={ () => void(0) }
+            />
+            <Button { ...buttonCommonProps } label="BACKSPACE" width={ '45%' }
+                onTouchEnd={
+                    () => setInputExpression(inputExpression.slice(0, -1)) }
+            />
         </ButtonRow>
     )
 
     return (
         <View style={ viewStyle }>
-            <TextInput {...textInputProps}></TextInput>
+            <TextInput {...textInputProps} value={ inputExpression }>
+            </TextInput>
             { firstRow }
             { secondRow }
             { thirdRow }
