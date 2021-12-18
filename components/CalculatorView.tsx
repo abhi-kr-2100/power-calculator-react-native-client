@@ -30,8 +30,9 @@ const CalculatorView = (props: CalculatorViewPropsType) => {
 
             fontSize: 25,
             fontWeight: 'bold',
-
-            textAlign: 'right'
+            textAlign: 'right',
+            
+            overflow: 'scroll'
         },
 
         editable: false
