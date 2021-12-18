@@ -110,7 +110,7 @@ const CalculatorView = (props: CalculatorViewPropsType) => {
             <Button { ...buttonCommonProps } label="1" width={ '20%' } />
             <Button { ...buttonCommonProps } label="2" width={ '20%' } />
             <Button { ...buttonCommonProps } label="3" width={ '20%' } />
-            <Button { ...buttonCommonProps } label="X" width={ '20%' } />
+            <Button { ...buttonCommonProps } label="*" width={ '20%' } />
         </ButtonRow>
     )
     
