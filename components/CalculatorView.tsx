@@ -24,8 +24,14 @@ const CalculatorView = (props: CalculatorViewPropsType) => {
         style: {
             width: '100%',
             height: '15%',
+            paddingRight: '2vw',
 
-            backgroundColor: 'gray'
+            backgroundColor: 'gray',
+
+            fontSize: 25,
+            fontWeight: 'bold',
+
+            textAlign: 'right'
         },
 
         editable: false
