@@ -1,5 +1,7 @@
+import React from 'react'
 import {
-    ColorValue, StyleProp, Text, TextStyle, View, ViewStyle
+    ColorValue, GestureResponderEvent, StyleProp, Text, TextStyle, View,
+    ViewStyle
 } from 'react-native'
 
 
@@ -13,7 +15,12 @@ export type ButtonPropsType = {
     width: string | number | undefined
 
     fontFamily: string | undefined,
-    fontSize: number | undefined
+    fontSize: number | undefined,
+
+    onTouchEnd?: ((event: GestureResponderEvent) => void) | undefined,
+
+    inputExpression: string
+    setInputExpression: React.Dispatch<React.SetStateAction<string>>
 }
 
 const Button = (props: ButtonPropsType) => {
@@ -36,8 +43,14 @@ const Button = (props: ButtonPropsType) => {
         color: props.foregroundColor
     }
 
+    const defaultOnTouchEndFunction = () => {
+        props.setInputExpression(props.inputExpression + props.label)
+    }
+
     return (
-        <View style={ viewStyle }>
+        <View style={ viewStyle } onTouchEnd={
+            props.onTouchEnd || defaultOnTouchEndFunction }
+        >
             <Text style={ textStyle }>{ props.label }</Text>
         </View>
     )
