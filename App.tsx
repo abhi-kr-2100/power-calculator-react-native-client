@@ -2,7 +2,7 @@ import CalculatorView from "./components/CalculatorView"
 
 
 const App = () => {
-    return <CalculatorView height={ '100vh' } width={ '100vw' } />
+    return <CalculatorView height={ '100%' } width={ '100%' } />
 }
 
 
