@@ -19,9 +19,10 @@ export type ButtonPropsType = {
 
     onTouchEnd?: ((event: GestureResponderEvent) => void) | undefined
 
-    inputExpression: string
-    setInputExpression: React.Dispatch<React.SetStateAction<string>>
+    inputExpression: string | undefined
+    setInputExpression: React.Dispatch<React.SetStateAction<string>> | undefined
 }
+
 
 const Button = (props: ButtonPropsType) => {
     const viewStyle: StyleProp<ViewStyle> = {
@@ -44,7 +45,9 @@ const Button = (props: ButtonPropsType) => {
     }
 
     const defaultOnTouchEndFunction = () => {
-        props.setInputExpression(props.inputExpression + props.label)
+        if (props.setInputExpression && props.inputExpression) {
+            props.setInputExpression(props.inputExpression + props.label)
+        }
     }
 
     return (
