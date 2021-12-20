@@ -6,7 +6,7 @@ import {
 import axios from "axios"
 
 import Button from "./Button"
-import ButtonRow, { ButtonRowPropsType } from "./ButtonRow"
+import ButtonRow from "./ButtonRow"
 
 
 export type CalculatorViewPropsType = {

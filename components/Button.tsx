@@ -14,10 +14,10 @@ export type ButtonPropsType = {
     height: string | number | undefined
     width: string | number | undefined
 
-    fontFamily: string | undefined,
-    fontSize: number | undefined,
+    fontFamily: string | undefined
+    fontSize: number | undefined
 
-    onTouchEnd?: ((event: GestureResponderEvent) => void) | undefined,
+    onTouchEnd?: ((event: GestureResponderEvent) => void) | undefined
 
     inputExpression: string
     setInputExpression: React.Dispatch<React.SetStateAction<string>>
