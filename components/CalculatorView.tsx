@@ -3,6 +3,8 @@ import {
     StyleProp, TextInput, TextInputProps, View, ViewStyle
 } from "react-native"
 
+import axios from "axios"
+
 import Button from "./Button"
 import ButtonRow, { ButtonRowPropsType } from "./ButtonRow"
 
@@ -117,8 +119,30 @@ const CalculatorView = (props: CalculatorViewPropsType) => {
     const fifthRow = (
         <ButtonRow { ...buttonRowCommonProps }>
             <Button { ...buttonCommonProps } label="=" width={ '20%' }
-                onTouchEnd={ () => void(0) }
+                onTouchEnd={
+                    () => {
+                        const payload = {
+                            expression: inputExpression,
+                            variables: {}
+                        }
+
+                        axios.post(
+                            'https://powercalc.pythonanywhere.com/api/evaluate',
+                            payload
+                        )
+                            .then(
+                                resp => {
+                                    const answ = resp.data['result'].toString()
+                                    setInputExpression(answ)
+                                }
+                            )
+                            .catch(
+                                err => setInputExpression('Error!')
+                            )
+                    }
+                }
             />
+            
             <Button { ...buttonCommonProps } label="0" width={ '20%' } />
             <Button { ...buttonCommonProps } label="." width={ '20%' } />
             <Button { ...buttonCommonProps } label="/" width={ '20%' } />
