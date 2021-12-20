@@ -45,7 +45,8 @@ const Button = (props: ButtonPropsType) => {
     }
 
     const defaultOnTouchEndFunction = () => {
-        if (props.setInputExpression && props.inputExpression) {
+        if (props.setInputExpression !== undefined &&
+                props.inputExpression !== undefined) {
             props.setInputExpression(props.inputExpression + props.label)
         }
     }
