@@ -14,6 +14,48 @@ export type CalculatorViewPropsType = {
     width: string | number | undefined
 }
 
+
+/**
+ * Given the input, determine whether open or closed parentheses should be
+ * added.
+ */
+const decideParen = (input: string): '(' | ')' => {
+    const openParenLastChars = ['', '+', '-', 'X', '/', '^', '(']
+    const lastInputChar = input.slice(-1)
+
+    if (openParenLastChars.includes(lastInputChar)) {
+        return '('
+    } else {
+        return ')'
+    }
+}
+
+
+/**
+ * Evaluate the arithmetic expression input and return the result as a
+ * Promise<string>. In case of any error, the Promise resolves to 'Error!'. 
+ */
+const evaluate = (input: string,
+        variables: Map<string, number>): Promise<string> => {
+
+    const payload = {
+        expression: input,
+        variables: variables
+    }
+
+    return axios.post(
+        'https://powercalc.pythonanywhere.com/api/evaluate',
+        payload
+    )
+        .then(
+            resp => resp.data['result'].toString()
+        )
+        .catch(
+            err => 'Error!'
+        )
+}
+
+
 const CalculatorView = (props: CalculatorViewPropsType) => {
     const [inputExpression, setInputExpression] = useState('')
 
@@ -68,19 +110,7 @@ const CalculatorView = (props: CalculatorViewPropsType) => {
             
             <Button { ...buttonCommonProps } label="( )" width={ '20%' }
                 onTouchEnd={
-                    () => {
-                        // decide wether to insert open or close parentheses
-                        
-                        const openParenLastChars = [
-                            '', '+', '-', 'X', '/', '^', '(']
-                        const lastInputChar = inputExpression.slice(-1)
-
-                        if (openParenLastChars.includes(lastInputChar)) {
-                            setInputExpression(inputExpression + '(')
-                        } else {
-                            setInputExpression(inputExpression + ')')
-                        }
-                    }
+                    () => setInputExpression(decideParen(inputExpression))
                 }
             />
 
@@ -121,24 +151,9 @@ const CalculatorView = (props: CalculatorViewPropsType) => {
             <Button { ...buttonCommonProps } label="=" width={ '20%' }
                 onTouchEnd={
                     () => {
-                        const payload = {
-                            expression: inputExpression,
-                            variables: {}
-                        }
-
-                        axios.post(
-                            'https://powercalc.pythonanywhere.com/api/evaluate',
-                            payload
-                        )
-                            .then(
-                                resp => {
-                                    const answ = resp.data['result'].toString()
-                                    setInputExpression(answ)
-                                }
-                            )
-                            .catch(
-                                err => setInputExpression('Error!')
-                            )
+                        evaluate(inputExpression, new Map<string, number>())
+                            .then(d => setInputExpression(d))
+                            .catch(e => setInputExpression(e))
                     }
                 }
             />
@@ -156,7 +171,8 @@ const CalculatorView = (props: CalculatorViewPropsType) => {
             />
             <Button { ...buttonCommonProps } label="BACKSPACE" width={ '45%' }
                 onTouchEnd={
-                    () => setInputExpression(inputExpression.slice(0, -1)) }
+                    () => setInputExpression(inputExpression.slice(0, -1))
+                }
             />
         </ButtonRow>
     )
