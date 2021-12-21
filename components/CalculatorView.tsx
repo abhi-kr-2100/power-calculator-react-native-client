@@ -110,7 +110,8 @@ const CalculatorView = (props: CalculatorViewPropsType) => {
             
             <Button { ...buttonCommonProps } label="( )" width={ '20%' }
                 onTouchEnd={
-                    () => setInputExpression(decideParen(inputExpression))
+                    () => setInputExpression(
+                        inputExpression + decideParen(inputExpression))
                 }
             />
 
