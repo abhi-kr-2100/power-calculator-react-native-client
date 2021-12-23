@@ -20,7 +20,7 @@ export type CalculatorViewPropsType = {
  * added.
  */
 const decideParen = (input: string): '(' | ')' => {
-    const openParenLastChars = ['', '+', '-', 'X', '/', '^', '(']
+    const openParenLastChars = ['', '+', '-', '*', '/', '^', '(']
     const lastInputChar = input.slice(-1)
 
     if (openParenLastChars.includes(lastInputChar)) {
