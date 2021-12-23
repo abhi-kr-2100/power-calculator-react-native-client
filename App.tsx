@@ -1,8 +1,8 @@
-import CalculatorView from "./components/CalculatorView"
+import NavScreen from "./navigation-screen/NavScreen"
 
 
 const App = () => {
-    return <CalculatorView height={ '100%' } width={ '100%' } />
+    return <NavScreen />
 }
 
 
