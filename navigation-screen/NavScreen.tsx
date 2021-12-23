@@ -1,11 +1,34 @@
 import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { View, Text } from "react-native"
+import { View, Text, StyleProp, ViewStyle, TextStyle } from "react-native"
 
-import CalculatorView, { CalculatorViewPropsType } from "../components/CalculatorView"
+import CalculatorView from "../components/CalculatorView"
+import { CalculatorViewPropsType } from "../components/CalculatorView"
+
 import VariableTable from "../components/VariableTable"
 import { VariableTablePropsType } from "../components/VariableTable"
+
 import Variable from "../components/Variable"
+
+
+const screenSwitchViewStyle: StyleProp<ViewStyle> = {
+    backgroundColor: 'blue',
+    
+    height: '10%',
+
+    alignItems: 'center'
+}
+
+const screenSwitchTextStyle: StyleProp<TextStyle> = {
+    backgroundColor: 'orange',
+
+    height: '100%',
+    width: '100%',
+
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontSize: 25
+}
 
 
 const VariablesScreen = ({ navigation }) => {
@@ -36,24 +59,9 @@ const VariablesScreen = ({ navigation }) => {
 
             <View
                 onTouchEnd={ () => navigation.navigate('Calculator') }
-                style={{
-                    backgroundColor: 'black',
-                    
-                    height: '10%',
-
-                    alignItems: 'center'
-                }}
+                style={ screenSwitchViewStyle }
             >
-                <Text style={{
-                    backgroundColor: 'orange',
-
-                    height: '90%',
-                    width: '95%',
-
-                    textAlign: 'center',
-                    fontSize: 38,
-                    fontWeight: 'bold'
-                }}>
+                <Text style={ screenSwitchTextStyle }>
                     CALCULATOR
                 </Text>
             </View>
@@ -85,24 +93,9 @@ const CalculatorScreen = ({ navigation }) => {
             
             <View 
                 onTouchEnd={ () => navigation.navigate('Variables') }
-                style={{
-                    backgroundColor: 'black',
-                    
-                    height: '10%',
-
-                    alignItems: 'center'
-                }}
+                style={ screenSwitchViewStyle }
             >
-                <Text style={{
-                    backgroundColor: 'orange',
-
-                    height: '90%',
-                    width: '95%',
-
-                    textAlign: 'center',
-                    fontSize: 38,
-                    fontWeight: 'bold'
-                }}>
+                <Text style={ screenSwitchTextStyle }>
                     VARIABLES
                 </Text>
             </View>
