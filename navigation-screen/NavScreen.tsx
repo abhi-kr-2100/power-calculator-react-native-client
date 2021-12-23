@@ -2,15 +2,37 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { View, Text } from "react-native"
 
-import CalculatorView from "../components/CalculatorView"
+import CalculatorView, { CalculatorViewPropsType } from "../components/CalculatorView"
 import VariableTable from "../components/VariableTable"
+import { VariableTablePropsType } from "../components/VariableTable"
+import Variable from "../components/Variable"
 
 
 const VariablesScreen = ({ navigation }) => {
+    const variableCommonProps = {
+        borderWidth: 1,
+        height: '5%',
+        width: '100%',
+
+        deleteButtonBgColor: 'red',
+        useButtonBgColor: 'orange',
+        textBgColor: 'wheat'
+    }
+
+    const variableTableProps: VariableTablePropsType = {
+        backgroundColor: 'blue',
+        height: '90%',
+        width: '100%',
+
+        children: [
+            <Variable name="pi" value={ 3.14 } { ...variableCommonProps } />,
+            <Variable name="e" value={ 2.71 } { ...variableCommonProps } />
+        ]
+    }
+
     return (
         <View style={{ height: '100%', width: '100%' }}>
-            <VariableTable height={ '90%' } width={ '100%' }>
-            </VariableTable>
+            <VariableTable { ...variableTableProps } />
 
             <View
                 onTouchEnd={ () => navigation.navigate('Calculator') }
@@ -41,9 +63,26 @@ const VariablesScreen = ({ navigation }) => {
 
 
 const CalculatorScreen = ({ navigation }) => {
+    const calculatorViewProps: CalculatorViewPropsType = {
+        ioDisplayBackgroundColor: 'gray',
+        ioDisplayFontSize: 25,
+
+        calculatorBodyColor: 'blue',
+        
+        calculatorButtonBgColor: 'orange',
+        calculatorButtonFgColor: 'black',
+
+        calculatorButtonFontFamily: 'Fira Code',
+        calculatorButtonFontSize: 25,
+        
+        width: '100%',
+        height: '90%'
+    }
+
     return (
         <View style={{ height: '100%', width: '100%' }}>
-            <CalculatorView height={ '90%' } width={ '100%' } />
+            <CalculatorView { ...calculatorViewProps } />
+            
             <View 
                 onTouchEnd={ () => navigation.navigate('Variables') }
                 style={{
