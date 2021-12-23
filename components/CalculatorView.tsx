@@ -10,27 +10,11 @@ import Button from "./Button"
 import ButtonRow from "./ButtonRow"
 
 
-export type CalculatorViewPropsType = {
-    height: string | number | undefined
-    width: string | number | undefined
-
-    ioDisplayBackgroundColor: ColorValue | undefined
-    ioDisplayFontSize: number | undefined
-
-    calculatorBodyColor: ColorValue | undefined
-
-    calculatorButtonBgColor: ColorValue | undefined
-    calculatorButtonFgColor: ColorValue | undefined
-    calculatorButtonFontFamily: string
-    calculatorButtonFontSize: number
-}
-
-
 /**
  * Given the input, determine whether open or closed parentheses should be
  * added.
  */
-const decideParen = (input: string): '(' | ')' => {
+ const decideParen = (input: string): '(' | ')' => {
     const openParenLastChars = ['', '+', '-', '*', '/', '^', '(']
     const lastInputChar = input.slice(-1)
 
@@ -64,6 +48,22 @@ const evaluate = (input: string,
         .catch(
             err => 'Error!'
         )
+}
+
+
+export type CalculatorViewPropsType = {
+    height: string | number | undefined
+    width: string | number | undefined
+
+    ioDisplayBackgroundColor: ColorValue | undefined
+    ioDisplayFontSize: number | undefined
+
+    calculatorBodyColor: ColorValue | undefined
+
+    calculatorButtonBgColor: ColorValue | undefined
+    calculatorButtonFgColor: ColorValue | undefined
+    calculatorButtonFontFamily: string
+    calculatorButtonFontSize: number
 }
 
 
