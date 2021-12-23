@@ -16,6 +16,13 @@ export type CalculatorViewPropsType = {
 
     ioDisplayBackgroundColor: ColorValue | undefined
     ioDisplayFontSize: number | undefined
+
+    calculatorBodyColor: ColorValue | undefined
+
+    calculatorButtonBgColor: ColorValue | undefined
+    calculatorButtonFgColor: ColorValue | undefined
+    calculatorButtonFontFamily: string
+    calculatorButtonFontSize: number
 }
 
 
@@ -90,15 +97,15 @@ const CalculatorView = (props: CalculatorViewPropsType) => {
         height: '14.16%',
         width: '100%',
 
-        backgroundColor: 'blue'
+        backgroundColor: props.calculatorBodyColor
     }
 
     const buttonCommonProps = {
-        backgroundColor: 'orange',
-        foregroundColor: 'black',
+        backgroundColor: props.calculatorButtonBgColor,
+        foregroundColor: props.calculatorButtonFgColor,
 
-        fontFamily: 'Fira Code',
-        fontSize: 14,
+        fontFamily: props.calculatorButtonFontFamily,
+        fontSize: props.calculatorButtonFontSize,
 
         height: '90%',
 
