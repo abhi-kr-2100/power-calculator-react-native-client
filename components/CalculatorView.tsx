@@ -64,7 +64,7 @@ const CalculatorView = (props: CalculatorViewPropsType) => {
         width: props.width
     }
 
-    const textInputProps: TextInputProps = {
+    const ioDisplayProps: TextInputProps = {
         style: {
             width: '100%',
             height: '15%',
@@ -180,7 +180,7 @@ const CalculatorView = (props: CalculatorViewPropsType) => {
 
     return (
         <View style={ viewStyle }>
-            <TextInput {...textInputProps} value={ inputExpression }>
+            <TextInput {...ioDisplayProps} value={ inputExpression }>
             </TextInput>
             { firstRow }
             { secondRow }
