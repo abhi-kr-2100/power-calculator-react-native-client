@@ -12,7 +12,7 @@ export type VariablePropsType = {
 
 
 const Variable = (props: VariablePropsType) => {
-    const viewStyle: StyleProp<ViewStyle> = {
+    const topStyle: StyleProp<ViewStyle> = {
         width: '100%',
         height: props.height,
 
@@ -34,7 +34,7 @@ const Variable = (props: VariablePropsType) => {
     }
 
     return (
-        <View style={ viewStyle }>
+        <View style={ topStyle }>
             <View style={ childrenStyle }>
                 <Text style={{ textAlign: 'center' }}>{ props.name }</Text>
             </View>
