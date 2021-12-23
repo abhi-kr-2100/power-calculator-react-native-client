@@ -1,6 +1,4 @@
-import { StyleProp, View, ViewStyle } from "react-native"
-
-import Variable from "./Variable"
+import { ColorValue, StyleProp, View, ViewStyle } from "react-native"
 
 
 export type VariableTablePropsType = {
@@ -8,13 +6,17 @@ export type VariableTablePropsType = {
 
     width: string | number | undefined
     height: string | number | undefined
+
+    backgroundColor: ColorValue | undefined
 }
 
 
 const VariableTable = (props: VariableTablePropsType) => {
     const viewStyle: StyleProp<ViewStyle> = {
         width: props.width,
-        height: props.height
+        height: props.height,
+
+        backgroundColor: props.backgroundColor
     }
 
     return (
