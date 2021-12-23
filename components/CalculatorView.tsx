@@ -1,5 +1,6 @@
 import { useState } from "react"
 import {
+    ColorValue,
     StyleProp, TextInput, TextInputProps, View, ViewStyle
 } from "react-native"
 
@@ -12,6 +13,9 @@ import ButtonRow from "./ButtonRow"
 export type CalculatorViewPropsType = {
     height: string | number | undefined
     width: string | number | undefined
+
+    ioDisplayBackgroundColor: ColorValue | undefined
+    ioDisplayFontSize: number | undefined
 }
 
 
@@ -70,9 +74,9 @@ const CalculatorView = (props: CalculatorViewPropsType) => {
             height: '15%',
             paddingRight: '2%',
 
-            backgroundColor: 'gray',
+            backgroundColor: props.ioDisplayBackgroundColor,
 
-            fontSize: 25,
+            fontSize: props.ioDisplayFontSize,
             fontWeight: 'bold',
             textAlign: 'right',
             
