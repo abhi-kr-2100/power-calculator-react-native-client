@@ -1,4 +1,4 @@
-import { View, Button, Text, StyleProp, ViewStyle } from "react-native"
+import { View, Text, StyleProp, ViewStyle, ColorValue } from "react-native"
 
 
 export type VariablePropsType = {
@@ -6,6 +6,8 @@ export type VariablePropsType = {
 
     name: string
     value: number
+
+    buttonBgColor: ColorValue | undefined
 }
 
 
@@ -14,24 +16,51 @@ const Variable = (props: VariablePropsType) => {
         width: '100%',
         height: props.height,
 
-        paddingTop: '2%',
-        paddingBottom: '2%',
-
         flexDirection: "row",
         alignItems: 'center',
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-evenly',
+
+        backgroundColor: 'wheat',
+
+        borderBottomWidth: 1
     }
 
     const childrenStyle = {
-        width: '25%'
+        width: '35%',
+        height: '100%',
+
+        textAlign: 'center',
+        justifyContent: 'center'
     }
 
     return (
         <View style={ viewStyle }>
-            <Text style={ childrenStyle }>{ props.name }</Text>
-            <Text style={ childrenStyle }>{ props.value }</Text>
-            <Button title="USE" onPress={ () => void(0) } />
-            <Button title="X" onPress={ () => void(0) } />
+            <View style={ childrenStyle }>
+                <Text style={{ textAlign: 'center' }}>{ props.name }</Text>
+            </View>
+            <View style={ childrenStyle }>
+                <Text style={{ textAlign: 'center' }}>{ props.value }</Text>
+            </View>
+
+            <View style={{
+                width: '20%',
+                height: '100%',
+                backgroundColor: props.buttonBgColor,
+
+                justifyContent: 'center'
+            }}>
+                <Text style={{ textAlign: 'center' }}>USE</Text>
+            </View>
+
+            <View style={{
+                width: '10%',
+                height: '100%',
+                backgroundColor: 'red',
+
+                justifyContent: 'center'
+            }}>
+                <Text style={{ textAlign: 'center' }}>X</Text>
+            </View>
         </View>
     )
 }
